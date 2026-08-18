@@ -140,6 +140,10 @@ Full endpoint documentation, schemas and field meanings:
 
 **Not verified:**
 
+- **The Teams webhook path has never been exercised.** `Watch-CopilotCreditThreshold.ps1` was run
+  against a tenant with zero consumption, so the no-breach path is tested and the **breach path,
+  including the Adaptive Card post, is not**. Test it with a low threshold in a tenant with real
+  usage before relying on the alerting.
 - Behaviour in a tenant with **non-zero consumption**. The test tenant reported 0 consumed against
   25,000 allocated, so field population under real load — particularly `NonBillableQuantity` and
   pay-as-you-go values — is untested. **This is the most valuable contribution someone can make**;
