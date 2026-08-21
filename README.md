@@ -1,6 +1,18 @@
+<div align="center">
+
 # Copilot Credit Observability
 
-Programmatic visibility over Copilot Studio credit consumption across a Power Platform tenant - by environment and by agent - with CSV export, threshold alerting and a Power BI model.
+**Programmatic visibility over Copilot Studio credit consumption**
+
+[![Verified](https://img.shields.io/badge/verified-live_tenant-success?style=flat-square)](#what-is-and-isnt-verified)
+[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white)](scripts/)
+[![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black)](powerbi/)
+[![Licence](https://img.shields.io/badge/licence-MIT-blue?style=flat-square)](LICENSE)
+[![Read only](https://img.shields.io/badge/API_calls-read_only-success?style=flat-square)](#)
+
+</div>
+
+Consumption by environment and by agent, with CSV export, threshold alerting and a Power BI model.
 
 Built on the undocumented licensing endpoints the Power Platform admin centre uses itself,
 **verified against a live tenant**.
@@ -75,30 +87,20 @@ All calls are read-only `GET`s.
 
 ## How it works
 
-```
-   az login / Connect-AzAccount
-              │
-              ▼
-   Token for audience
-   licensing.powerplatform.microsoft.com          ← not api.powerplatform.com
-              │
-    ┌─────────┴──────────┐
-    ▼                    ▼
- Environment          Resource
- capacity             consumption
- (allocated,          (per agent,
-  consumed,            billable vs
-  available)           non-billable)
-    │                    │
-    └─────────┬──────────┘
-              ▼
-      CSV + JSON export
-              │
-    ┌─────────┴──────────┐
-    ▼                    ▼
- Power BI            Threshold alert
- (trend, forecast,   (Teams webhook)
-  chargeback)
+```mermaid
+flowchart TD
+    A["az login / Connect-AzAccount"] --> B["Token for audience<br/><b>licensing.powerplatform.microsoft.com</b><br/><i>not api.powerplatform.com</i>"]
+    B --> C["Environment capacity<br/><small>allocated, consumed, available</small>"]
+    B --> D["Resource consumption<br/><small>per agent, billable vs non-billable</small>"]
+    C --> E["CSV + JSON export"]
+    D --> E
+    E --> F["Power BI<br/><small>trend, forecast, chargeback</small>"]
+    E --> G["Threshold alert<br/><small>Teams webhook</small>"]
+
+    style B fill:#0F6CBD,stroke:#0A4E8A,color:#fff
+    style E fill:#742774,stroke:#4A184A,color:#fff
+    style F fill:#F2C811,stroke:#B89400,color:#000
+    style G fill:#D93F0B,stroke:#9E2E08,color:#fff
 ```
 
 Full endpoint documentation, schemas and field meanings:
