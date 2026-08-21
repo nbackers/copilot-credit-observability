@@ -2,7 +2,7 @@ name: Verification result
 description: Report what the API returns in a tenant with real consumption
 labels: [verification]
 body:
-  - type: markdown
+- type: markdown
     attributes:
       value: |
         The endpoints were verified working, but in a tenant reporting **zero** consumed credits.
@@ -10,56 +10,49 @@ body:
 
         **Redact tenant IDs, environment IDs, resource IDs and agent names.**
         Shapes and magnitudes are what matter.
-
-  - type: dropdown
+- type: dropdown
     id: consumed-populated
     attributes:
       label: Are `consumed` values populated on resource rows?
       options:
-        - "Yes — non-zero values returned per agent"
-        - "No — zeros despite known agent usage"
-        - "Partially — some agents only"
+- "Yes - non-zero values returned per agent"
+- "No - zeros despite known agent usage"
+- "Partially - some agents only"
     validations:
       required: true
-
-  - type: dropdown
+- type: dropdown
     id: nonbillable
     attributes:
       label: Is `metadata.NonBillableQuantity` ever non-zero?
       options:
-        - "Yes"
-        - "No — always zero"
-        - "Not observed"
+- "Yes"
+- "No - always zero"
+- "Not observed"
     validations:
       required: true
-
-  - type: input
+- type: input
     id: nonbillable-driver
     attributes:
       label: If non-zero, what appears to drive non-billable consumption?
-
-  - type: dropdown
+- type: dropdown
     id: paygo
     attributes:
       label: Do the payGo fields populate?
       options:
-        - "Yes — entitled and/or consumed are non-zero"
-        - "No — zeros throughout"
-        - "Not applicable — capacity never exceeded"
-
-  - type: input
+- "Yes - entitled and/or consumed are non-zero"
+- "No - zeros throughout"
+- "Not applicable - capacity never exceeded"
+- type: input
     id: status
     attributes:
       label: What values have you seen for `capacity.status`?
       placeholder: e.g. WithinCapacity, OverCapacity
-
-  - type: input
+- type: input
     id: latency
     attributes:
       label: How far behind collection time was `lastUpdatedOn`?
       placeholder: e.g. roughly 24 hours
-
-  - type: textarea
+- type: textarea
     id: paging
     attributes:
       label: Paging and includeFields
@@ -67,8 +60,7 @@ body:
         Did `pageSize=5000` cap out? What did `includeFields=users` add?
         Paste a redacted response fragment if useful.
       render: text
-
-  - type: textarea
+- type: textarea
     id: notes
     attributes:
       label: Anything else

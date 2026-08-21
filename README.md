@@ -1,7 +1,6 @@
 # Copilot Credit Observability
 
-Programmatic visibility over Copilot Studio credit consumption across a Power Platform tenant —
-by environment and by agent — with CSV export, threshold alerting and a Power BI model.
+Programmatic visibility over Copilot Studio credit consumption across a Power Platform tenant - by environment and by agent - with CSV export, threshold alerting and a Power BI model.
 
 Built on the undocumented licensing endpoints the Power Platform admin centre uses itself,
 **verified against a live tenant**.
@@ -20,7 +19,6 @@ open. There is **no supported API** behind it, so consumption cannot be trended,
 on, or charged back to the business unit that caused it.
 
 The practical consequences are consistent:
-
 - Cost becomes visible when **capacity runs out**, not before.
 - Nobody knows which agent is expensive, so nobody can optimise the right one.
 - There is no chargeback, so agent cost sits in a central bucket and every team treats it as free.
@@ -33,7 +31,7 @@ Agent rollout ends up governed by surprise rather than by plan.
 | Problem | How this repo solves it |
 |---|---|
 | No supported API for credit consumption | Documents the working licensing endpoints, verified live |
-| Wrong token audience returns 401 | Identifies the correct audience — the most common failure |
+| Wrong token audience returns 401 | Identifies the correct audience - the most common failure |
 | Consumption only visible in a portal screen | Collector script exporting CSV/JSON for history |
 | Can't tell which agent is expensive | Per-agent consumption with resource names |
 | Billable vs non-billable not reported | Derived, since the API returns only the components |
@@ -112,7 +110,7 @@ Full endpoint documentation, schemas and field meanings:
 
 | Path | Purpose |
 |---|---|
-| `scripts/Get-CopilotCreditConsumption.ps1` | Collector — environment and agent grain, CSV/JSON export |
+| `scripts/Get-CopilotCreditConsumption.ps1` | Collector - environment and agent grain, CSV/JSON export |
 | `scripts/Watch-CopilotCreditThreshold.ps1` | Threshold evaluation with optional Teams alerting |
 | `docs/api-reference.md` | Verified endpoint reference, schemas, negative findings |
 | `docs/devtools-capture.md` | Re-capturing endpoints if they move |
@@ -122,8 +120,7 @@ Full endpoint documentation, schemas and field meanings:
 
 ## What is and isn't verified
 
-**Verified against a live tenant (18 August 2026)** — 4 environments, 765 agent records returned:
-
+**Verified against a live tenant (18 August 2026)** - 4 environments, 765 agent records returned:
 - Token audience must be `https://licensing.powerplatform.microsoft.com`
 - Environment capacity endpoint, with the full response schema documented
 - Per-agent resource endpoint, including its array-wrapped response shape
@@ -132,21 +129,19 @@ Full endpoint documentation, schemas and field meanings:
 - The downloads endpoint returns report availability metadata
 - Both scripts run end-to-end
 
-**Verified negative** — worth knowing because it costs time to establish:
-
+**Verified negative** - worth knowing because it costs time to establish:
 - `api.powerplatform.com/analytics/.../copilotInsights/...` returns **404** for both `PowerApps` and
   `CopilotStudio`, despite being recoverable from the admin centre's shipped JavaScript. Do not
   build on it.
 
 **Not verified:**
-
 - **The Teams webhook path has never been exercised.** `Watch-CopilotCreditThreshold.ps1` was run
   against a tenant with zero consumption, so the no-breach path is tested and the **breach path,
   including the Adaptive Card post, is not**. Test it with a low threshold in a tenant with real
   usage before relying on the alerting.
 - Behaviour in a tenant with **non-zero consumption**. The test tenant reported 0 consumed against
-  25,000 allocated, so field population under real load — particularly `NonBillableQuantity` and
-  pay-as-you-go values — is untested. **This is the most valuable contribution someone can make**;
+  25,000 allocated, so field population under real load - particularly `NonBillableQuantity` and
+  pay-as-you-go values - is untested. **This is the most valuable contribution someone can make**;
   see the *Verification result* issue template.
 - Report generation and retrieval calls behind the downloads endpoint.
 - Paging behaviour beyond `pageSize=5000`.
@@ -155,8 +150,7 @@ Full endpoint documentation, schemas and field meanings:
 ---
 
 ## Limitations
-
-- **Undocumented APIs.** They can change without notice. If you get a `404`, the path moved — see
+- **Undocumented APIs.** They can change without notice. If you get a `404`, the path moved - see
   [docs/devtools-capture.md](docs/devtools-capture.md).
 - **Daily snapshot, not live.** `consumptionType` is `Snapshot` and `lastUpdatedOn` ran about a day
   behind collection time. Set alert thresholds with enough headroom to react.
@@ -169,9 +163,9 @@ Full endpoint documentation, schemas and field meanings:
 
 ## Contributing
 
-Verification results from tenants with real consumption are the most useful contribution here — see
+Verification results from tenants with real consumption are the most useful contribution here - see
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licence
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).

@@ -49,7 +49,7 @@ Passed as a path segment. All four were accepted; only types in use return rows.
 | `SCMessages` | Service Copilot messages | ✅ accepted, empty in test tenant |
 | `PowerAutomateProcess` | Power Automate process capacity | ✅ accepted, empty in test tenant |
 
-An unused entitlement type returns `200` with an empty `value` array — not a `404`. Absence of rows
+An unused entitlement type returns `200` with an empty `value` array - not a `404`. Absence of rows
 means no capacity of that type, not a bad request.
 
 ---
@@ -112,12 +112,12 @@ Returns one object per environment under `value[]`.
 | `entitlement.capacity.availableQuantity` | Remaining |
 | `entitlement.capacity.consumed.writeOff` | Credits written off, not charged |
 | `entitlement.capacity.status` | e.g. `WithinCapacity` |
-| `entitlement.capacity.consumed.lastUpdatedOn` | **Freshness — see the latency note below** |
+| `entitlement.capacity.consumed.lastUpdatedOn` | **Freshness - see the latency note below** |
 | `entitlement.payGo.consumed.value` | Pay-as-you-go overage consumption |
 
 > `consumptionType` is `Snapshot`. The figure is a point-in-time reading, not a live counter, and
 > `lastUpdatedOn` was **roughly a day behind** the collection time in testing. Treat this as
-> day-grain data. Alerting on it needs headroom — a threshold breach is discovered up to 24 hours
+> day-grain data. Alerting on it needs headroom - a threshold breach is discovered up to 24 hours
 > after it happens.
 
 ---
@@ -140,7 +140,7 @@ GET https://licensing.powerplatform.microsoft.com/v2.0/tenants/{tenantId}/entitl
 
 ### Response shape
 
-The response is an **array**, and the collection sits on the first element — not a plain `value`
+The response is an **array**, and the collection sits on the first element - not a plain `value`
 property. This asymmetry with endpoint 1 is easy to get wrong:
 
 ```jsonc
@@ -166,13 +166,13 @@ property. This asymmetry with endpoint 1 is easy to get wrong:
 | Field | Meaning |
 |---|---|
 | `resourceId` | The agent |
-| `metadata.ResourceName` | Display name — the only human-readable identifier |
+| `metadata.ResourceName` | Display name - the only human-readable identifier |
 | `consumed` | Total credits consumed in the window |
 | `metadata.NonBillableQuantity` | Portion not charged |
 | `unit` | `Messages` |
 | `asOfDate` | Timestamp of the reading |
 
-**Billable consumption is not returned** — derive it as
+**Billable consumption is not returned** - derive it as
 `consumed - NonBillableQuantity`. This distinction is the single most useful number for
 chargeback, and it only exists once you compute it.
 
@@ -210,7 +210,7 @@ GET https://api.powerplatform.com/analytics/tenants/{tenantId}/copilotInsights/r
 ```
 
 That path is recoverable from the shipped JavaScript, so it is genuinely used by the product. But
-when called directly with a valid `api.powerplatform.com` token it returned **404** — for both
+when called directly with a valid `api.powerplatform.com` token it returned **404** - for both
 `PowerApps` and `CopilotStudio` resource types.
 
 Do not build on this family. The `licensing.powerplatform.microsoft.com` endpoints above are the
@@ -227,9 +227,8 @@ but publishes no REST endpoint behind it. If a supported API ships, migrate to i
 ## Stability and risk
 
 These are private endpoints. Reasonable precautions:
-
 - **Treat schema as untrusted.** The collector reads defensively and tolerates missing properties.
-- **Version-check on failure.** A `404` means the path moved — re-capture it (see
+- **Version-check on failure.** A `404` means the path moved - re-capture it (see
   [devtools-capture.md](devtools-capture.md)).
 - **Read-only.** Every call here is a `GET`. Nothing in this repo writes to the tenant.
 - **Don't hardcode the tenant.** Infer it from the signed-in context.

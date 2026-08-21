@@ -3,9 +3,8 @@
     Collects Copilot Studio credit consumption for a Power Platform tenant.
 
 .DESCRIPTION
-    Retrieves entitlement consumption from the Power Platform licensing service —
-    the same data the Power Platform admin centre shows under
-    Licensing > Copilot Studio — at two grains:
+    Retrieves entitlement consumption from the Power Platform licensing service - the same data the Power Platform admin centre shows under
+    Licensing > Copilot Studio - at two grains:
 
       Environment level : allocated, consumed, available and pay-as-you-go capacity
       Resource level    : consumption per agent, including non-billable quantity

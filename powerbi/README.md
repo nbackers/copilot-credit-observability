@@ -67,7 +67,7 @@ Projected Month End =
 [Total Consumed] + ( [Daily Burn Rate] * ( 30 - DAY ( TODAY () ) ) )
 ```
 
-`Days To Exhaustion` is the number that gets attention in a governance forum — it converts an
+`Days To Exhaustion` is the number that gets attention in a governance forum - it converts an
 abstract credit balance into a date.
 
 ### Status
@@ -84,25 +84,24 @@ SWITCH (
 
 ## Suggested pages
 
-**1. Tenant summary** — cards for Total Allocated, Total Consumed, Percent Consumed and Days To
+**1. Tenant summary** - cards for Total Allocated, Total Consumed, Percent Consumed and Days To
 Exhaustion; a gauge against allocated capacity; consumption trend line.
 
-**2. By environment** — table of environments with allocated, consumed, available, percent and
-status, conditionally formatted on `Capacity Status`. Include `IsManagedEnvironment` — it's a useful
+**2. By environment** - table of environments with allocated, consumed, available, percent and
+status, conditionally formatted on `Capacity Status`. Include `IsManagedEnvironment` - it's a useful
 governance cut.
 
-**3. By agent** — `ResourceName` ranked by `Agent Consumed`, with billable versus non-billable
+**3. By agent** - `ResourceName` ranked by `Agent Consumed`, with billable versus non-billable
 split. This is the chargeback view and usually the first thing a platform owner asks for.
 
-**4. Forecast** — burn rate over time with projection, plus days-to-exhaustion by environment.
+**4. Forecast** - burn rate over time with projection, plus days-to-exhaustion by environment.
 
 ## Caveats to put on the report
 
 Worth stating on the page itself, because it prevents misreadings:
-
 - Figures are a **daily snapshot** (`consumptionType: Snapshot`), not live. `LastUpdatedOn` was
   around a day behind collection time in testing.
 - **Billable consumption is derived** as `Consumed - NonBillableQuantity`; the API does not return it.
-- Environment names come from the environments dataset — the resource dataset returns only
+- Environment names come from the environments dataset - the resource dataset returns only
   `EnvironmentId`.
 - The underlying APIs are undocumented and may change. See [../docs/api-reference.md](../docs/api-reference.md).

@@ -7,7 +7,6 @@ credits, so field behaviour under load is still unknown.
 ## Report a verification result
 
 Use the **Verification result** issue template. The specific unknowns:
-
 - Are `consumed` values populated on resource rows when agents are actively used?
 - Is `metadata.NonBillableQuantity` ever non-zero, and what drives it?
 - Do `payGo.entitled` / `payGo.consumed` populate once capacity is exceeded?
@@ -27,7 +26,7 @@ open an issue with the old and new paths, method, audience and response shape.
 ## Pull requests
 
 1. One concern per PR.
-2. Scripts must stay **read-only** — no `POST`, `PATCH` or `DELETE` against a tenant.
+2. Scripts must stay **read-only** - no `POST`, `PATCH` or `DELETE` against a tenant.
 3. Parse defensively. These are private APIs; assume properties may be missing or renamed.
 4. Never commit a tenant ID, environment ID, bearer token, webhook URL or captured response
    containing real identifiers.
@@ -37,7 +36,7 @@ open an issue with the old and new paths, method, audience and response shape.
 ## The verified/inferred distinction
 
 This repo deliberately separates what was confirmed against a live tenant from what was assumed,
-including negative findings. Please preserve that when contributing — an unverified claim presented
+including negative findings. Please preserve that when contributing - an unverified claim presented
 as fact is worse than no claim, because the next person builds on it.
 
 ## Code of conduct

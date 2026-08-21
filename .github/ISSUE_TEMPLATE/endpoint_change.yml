@@ -2,63 +2,56 @@ name: Endpoint change
 description: An endpoint has moved, changed shape, or started failing
 labels: [endpoint-change]
 body:
-  - type: markdown
+- type: markdown
     attributes:
       value: |
         These are undocumented endpoints and can change without notice.
         See `docs/devtools-capture.md` for how to recapture them.
 
         **Redact your tenant ID, environment IDs and any bearer token.**
-
-  - type: dropdown
+- type: dropdown
     id: which
     attributes:
       label: Which call is affected?
       options:
-        - "Environment capacity (v2.0 .../environments/entitlementConsumptions/{type})"
-        - "Resource consumption (v2.0 .../entitlements/{type}/resources)"
-        - "Downloads report (v1.0 .../Downloads/getAll/...)"
-        - "Token acquisition / audience"
+- "Environment capacity (v2.0 .../environments/entitlementConsumptions/{type})"
+- "Resource consumption (v2.0 .../entitlements/{type}/resources)"
+- "Downloads report (v1.0 .../Downloads/getAll/...)"
+- "Token acquisition / audience"
     validations:
       required: true
-
-  - type: dropdown
+- type: dropdown
     id: symptom
     attributes:
       label: Symptom
       options:
-        - "404 Not Found — path moved"
-        - "401 Unauthorized — audience changed"
-        - "403 Forbidden — role requirement changed"
-        - "200 but the response shape changed"
-        - "Other"
+- "404 Not Found - path moved"
+- "401 Unauthorized - audience changed"
+- "403 Forbidden - role requirement changed"
+- "200 but the response shape changed"
+- "Other"
     validations:
       required: true
-
-  - type: input
+- type: input
     id: old-path
     attributes:
       label: Path that used to work
       placeholder: /v2.0/tenants/{tenantId}/environments/entitlementConsumptions/MCSMessages
-
-  - type: input
+- type: input
     id: new-path
     attributes:
       label: New path captured from DevTools (if found)
-
-  - type: input
+- type: input
     id: audience
     attributes:
       label: Token audience (`aud` claim from jwt.ms)
       placeholder: https://licensing.powerplatform.microsoft.com
-
-  - type: textarea
+- type: textarea
     id: response
     attributes:
       label: Redacted response fragment
       render: json
-
-  - type: input
+- type: input
     id: date
     attributes:
       label: Date observed

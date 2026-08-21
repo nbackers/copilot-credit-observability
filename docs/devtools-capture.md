@@ -10,13 +10,13 @@ recapture it from the admin centre. This takes about five minutes and needs no a
 3. Press **F12** and select the **Network** tab.
 4. Filter for `licensing.powerplatform` (or `entitlementConsumptions`, `MCSMessages`, `resources`).
 5. Refresh, then click through **Summary**, **Copilot credit capacity**, **Environments**, and an
-   individual environment row — each view issues a different request.
+   individual environment row - each view issues a different request.
 6. Select the request you want and record:
-   - full URL including query string
-   - HTTP method
-   - the `Authorization` header's **audience** (decode the token at [jwt.ms](https://jwt.ms) and read
-     the `aud` claim — this is the detail most people get wrong)
-   - response JSON shape
+- full URL including query string
+- HTTP method
+- the `Authorization` header's **audience** (decode the token at [jwt.ms](https://jwt.ms) and read
+     the `aud` claim - this is the detail most people get wrong)
+- response JSON shape
 
 ## Replay
 
@@ -30,7 +30,7 @@ $result | ConvertTo-Json -Depth 50 | Set-Content .\capture.json
 code .\capture.json
 ```
 
-Then work out where the collection lives — the two endpoints in this repo differ:
+Then work out where the collection lives - the two endpoints in this repo differ:
 
 ```powershell
 $result.PSObject.Properties.Name     # top-level properties
@@ -42,10 +42,9 @@ $result[0]       | Format-List *     # array-wrapped responses
 ## Token safety
 
 The bearer token in a copied request is a live credential.
-
 - Never paste it into a website, including API documentation sites that offer a "try it" console.
 - Don't commit it, and clear it from terminal history afterwards.
-- It expires within the hour — for anything repeatable use `az account get-access-token` instead of
+- It expires within the hour - for anything repeatable use `az account get-access-token` instead of
   a captured token.
 
 ## Please contribute what you find
