@@ -7,6 +7,7 @@
 [![Verified](https://img.shields.io/badge/verified-live_tenant-success?style=flat-square)](#what-is-and-isnt-verified)
 [![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&logo=powershell&logoColor=white)](scripts/)
 [![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black)](powerbi/)
+[![Sample code](https://img.shields.io/badge/sample_code-not_production_ready-orange?style=flat-square)](#disclaimer)
 [![Licence](https://img.shields.io/badge/licence-MIT-blue?style=flat-square)](LICENSE)
 [![Read only](https://img.shields.io/badge/API_calls-read_only-success?style=flat-square)](#)
 
@@ -167,6 +168,25 @@ Full endpoint documentation, schemas and field meanings:
 
 Verification results from tenants with real consumption are the most useful contribution here - see
 [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+## Disclaimer
+
+This is **sample code**, published as a reusable reference pattern.
+
+- Provided **as is**, without warranty of any kind, express or implied. See [LICENSE](LICENSE).
+- **Not production ready.** Treat it as a starting point, not a finished solution. Review, test and
+  harden it against your own requirements before any real use.
+- **Not an official Microsoft product** and not affiliated with, endorsed by, or supported by
+  Microsoft. Product names are trademarks of their respective owners.
+- **No support commitment.** Issues and pull requests are welcome, but nothing here carries an SLA.
+- Some behaviours documented here rely on **undocumented or preview platform features** that can
+  change without notice. Verify against current documentation before depending on them.
+- You are responsible for security, privacy, licensing and regulatory compliance in your own
+  environment.
+
+---
 
 ## Licence
 
